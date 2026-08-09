@@ -50,7 +50,6 @@ if st.button("Predict Churn"):
     "Monthly Charges": [monthly],
     "Total Charges": [monthly * tenure]
 })
-    st.write(data.columns)
     prediction = model.predict(data)
     probability = model.predict_proba(data)[0][1]
 
