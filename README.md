@@ -56,6 +56,4 @@ streamlit run app.py
 
 Irfan Shah
 
-## How to Run
-
 Install dependencies:
