@@ -132,6 +132,28 @@ if st.button("Predict Churn"):
 
 
     # Prediction
+    cat_cols = [
+    "Gender",
+    "Senior Citizen",
+    "Partner",
+    "Dependents",
+    "Phone Service",
+    "Multiple Lines",
+    "Internet Service",
+    "Online Security",
+    "Online Backup",
+    "Device Protection",
+    "Tech Support",
+    "Streaming TV",
+    "Streaming Movies",
+    "Contract",
+    "Paperless Billing",
+    "Payment Method",
+    "Total Charges",
+    "TenureGroup"
+]
+
+data[cat_cols] = data[cat_cols].astype(str)
 
     prediction = model.predict(data)
 
