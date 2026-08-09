@@ -47,8 +47,8 @@ if st.button("Predict Churn"):
     "Contract": [contract],
     "Paperless Billing": ["Yes"],
     "Payment Method": [payment],
-    "Monthly Charges": [charges],
-    "Total Charges": [charges * tenure]
+    "Monthly Charges": [monthly],
+    "Total Charges": [monthly * tenure]
 })
     st.write(data.columns)
     prediction = model.predict(data)
