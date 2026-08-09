@@ -119,7 +119,7 @@ if st.button("Predict Churn"):
 
         "Monthly Charges": [monthly],
 
-        "Total Charges": [str(monthly * tenure)],
+        "Total Charges": [monthly * tenure],
 
         "TotalServices": [total_services],
 
