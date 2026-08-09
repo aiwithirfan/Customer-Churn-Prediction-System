@@ -31,28 +31,24 @@ payment = st.selectbox(
 if st.button("Predict Churn"):
 
     data = pd.DataFrame({
-    "Gender":["Male"],
-    "Senior Citizen":[0],
-    "Partner":["No"],
-    "Dependents":["No"],
-    "Phone Service":["Yes"],
-    "Multiple Lines":["No"],
-    "Internet Service":[internet],
-    "Online Security":["No"],
-    "Online Backup":["No"],
-    "Device Protection":["No"],
-    "Tech Support":["No"],
-    "Streaming TV":["No"],
-    "Streaming Movies":["No"],
-    "Contract":[contract],
-    "Paperless Billing":["Yes"],
-    "Payment Method":[payment],
-    "Tenure Months":[tenure],
-    "Monthly Charges":[monthly],
-    "Total Charges":[monthly*tenure],
-    "TotalServices":[3],
-    "TenureGroup":["1-2 years"],
-    "ChargePerService":[monthly/3]
+    "gender": ["Male"],
+    "Senior Citizen": [0],
+    "Partner": ["Yes"],
+    "Dependents": ["No"],
+    "Tenure Months": [tenure],
+    "Phone Service": ["Yes"],
+    "Multiple Lines": ["No"],
+    "Internet Service": [internet],
+    "Online Security": ["No"],
+    "Online Backup": ["No"],
+    "Device Protection": ["No"],
+    "Streaming TV": ["No"],
+    "Streaming Movies": ["No"],
+    "Contract": [contract],
+    "Paperless Billing": ["Yes"],
+    "Payment Method": [payment],
+    "Monthly Charges": [charges],
+    "Total Charges": [charges * tenure]
 })
     st.write(data.columns)
     prediction = model.predict(data)
