@@ -62,10 +62,10 @@ payment = st.selectbox(
 
 if st.button("Predict Churn"):
 
-
-    # Feature Engineering (same as training)
+    # Feature Engineering
 
     total_services = 3
+
 
     if tenure <= 12:
         tenure_group = "New"
@@ -84,76 +84,60 @@ if st.button("Predict Churn"):
     data = pd.DataFrame({
 
         "Gender": ["Male"],
-
         "Senior Citizen": ["No"],
-
         "Partner": ["Yes"],
-
         "Dependents": ["No"],
-
         "Tenure Months": [tenure],
-
         "Phone Service": ["Yes"],
-
         "Multiple Lines": ["No"],
-
         "Internet Service": [internet],
-
         "Online Security": ["No"],
-
         "Online Backup": ["No"],
-
         "Device Protection": ["No"],
-
         "Tech Support": ["No"],
-
         "Streaming TV": ["No"],
-
         "Streaming Movies": ["No"],
-
         "Contract": [contract],
-
         "Paperless Billing": ["Yes"],
-
         "Payment Method": [payment],
-
         "Monthly Charges": [monthly],
-
         "Total Charges": [str(monthly * tenure)],
-
         "TotalServices": [total_services],
-
         "TenureGroup": [tenure_group],
-
         "ChargePerService": [charge_per_service]
 
     })
 
 
+    # Convert categorical columns to string
+
+    cat_cols = [
+        "Gender",
+        "Senior Citizen",
+        "Partner",
+        "Dependents",
+        "Phone Service",
+        "Multiple Lines",
+        "Internet Service",
+        "Online Security",
+        "Online Backup",
+        "Device Protection",
+        "Tech Support",
+        "Streaming TV",
+        "Streaming Movies",
+        "Contract",
+        "Paperless Billing",
+        "Payment Method",
+        "Total Charges",
+        "TenureGroup"
+    ]
+
+
+    data[cat_cols] = data[cat_cols].astype(str)
+
+
 
     # Prediction
-    cat_cols = [
-    "Gender",
-    "Senior Citizen",
-    "Partner",
-    "Dependents",
-    "Phone Service",
-    "Multiple Lines",
-    "Internet Service",
-    "Online Security",
-    "Online Backup",
-    "Device Protection",
-    "Tech Support",
-    "Streaming TV",
-    "Streaming Movies",
-    "Contract",
-    "Paperless Billing",
-    "Payment Method",
-    "Total Charges",
-    "TenureGroup"
-]
-
-data[cat_cols] = data[cat_cols].astype(str)
 
     prediction = model.predict(data)
 
@@ -165,7 +149,7 @@ data[cat_cols] = data[cat_cols].astype(str)
 
         st.error(
             f"""
-            High Risk Customer 
+            High Risk Customer ⚠️
 
             Churn Probability: {probability:.2%}
             """
@@ -175,7 +159,7 @@ data[cat_cols] = data[cat_cols].astype(str)
 
         st.success(
             f"""
-            Low Risk Customer 
+            Low Risk Customer ✅
 
             Churn Probability: {probability:.2%}
             """
