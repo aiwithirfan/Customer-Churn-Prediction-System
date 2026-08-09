@@ -3,16 +3,16 @@ import joblib
 import pandas as pd
 
 
-# Load trained model
+# Load model
 model = joblib.load("customer_churn_final_model.pkl")
 
 
-# App Title
+# Title
 st.title("Customer Churn Prediction Engine")
 st.write("Predict customer churn probability using Machine Learning")
 
 
-# User Inputs
+# Inputs
 
 tenure = st.number_input(
     "Tenure Months",
@@ -20,6 +20,7 @@ tenure = st.number_input(
     max_value=100,
     value=12
 )
+
 
 monthly = st.number_input(
     "Monthly Charges",
@@ -62,6 +63,7 @@ payment = st.selectbox(
 
 if st.button("Predict Churn"):
 
+
     # Feature Engineering
 
     total_services = 3
@@ -69,49 +71,74 @@ if st.button("Predict Churn"):
 
     if tenure <= 12:
         tenure_group = "New"
+
     elif tenure <= 36:
         tenure_group = "Established"
+
     else:
         tenure_group = "Loyal"
+
 
 
     charge_per_service = monthly / (total_services + 1)
 
 
 
-    # Create input dataframe
+    # Create dataframe
 
     data = pd.DataFrame({
 
         "Gender": ["Male"],
+
         "Senior Citizen": ["No"],
+
         "Partner": ["Yes"],
+
         "Dependents": ["No"],
+
         "Tenure Months": [tenure],
+
         "Phone Service": ["Yes"],
+
         "Multiple Lines": ["No"],
+
         "Internet Service": [internet],
+
         "Online Security": ["No"],
+
         "Online Backup": ["No"],
+
         "Device Protection": ["No"],
+
         "Tech Support": ["No"],
+
         "Streaming TV": ["No"],
+
         "Streaming Movies": ["No"],
+
         "Contract": [contract],
+
         "Paperless Billing": ["Yes"],
+
         "Payment Method": [payment],
+
         "Monthly Charges": [monthly],
+
         "Total Charges": [str(monthly * tenure)],
+
         "TotalServices": [total_services],
+
         "TenureGroup": [tenure_group],
+
         "ChargePerService": [charge_per_service]
 
     })
 
 
-    # Convert categorical columns to string
 
-    cat_cols = [
+    # Convert categorical columns
+
+    categorical_columns = [
         "Gender",
         "Senior Citizen",
         "Partner",
@@ -133,7 +160,7 @@ if st.button("Predict Churn"):
     ]
 
 
-    data[cat_cols] = data[cat_cols].astype(str)
+    data[categorical_columns] = data[categorical_columns].astype(str)
 
 
 
@@ -149,17 +176,18 @@ if st.button("Predict Churn"):
 
         st.error(
             f"""
-            High Risk Customer ⚠️
+            ⚠️ High Risk Customer
 
             Churn Probability: {probability:.2%}
             """
         )
 
+
     else:
 
         st.success(
             f"""
-            Low Risk Customer ✅
+            ✅ Low Risk Customer
 
             Churn Probability: {probability:.2%}
             """
