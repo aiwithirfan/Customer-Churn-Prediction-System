@@ -56,4 +56,6 @@ streamlit run app.py
 
 Irfan Shah
 
-Install dependencies:
+## Live Demo
+
+Try the app: https://customer-churn-prediction-system-6azfdcguwsht7esgqnmxdv.streamlit.app/
